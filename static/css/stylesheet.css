@@ -1,0 +1,85 @@
+html {
+    overflow: hidden;
+}
+
+body {
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background: gray;
+}
+
+#log {
+    background: white;
+    margin: 0;
+    padding: 0.5em;
+    position: absolute;
+    top: 0.5em;
+    left: 0.5em;
+    right: 0.5em;
+    bottom: 4em;
+    border-radius: 5px;
+    overflow: auto;
+}
+
+#form {
+    display: flex;
+    align-items: center;
+    padding: 0 0.5em;
+    margin: 0;
+    position: absolute;
+    bottom: 1em;
+    left: 0.5em;
+    right: 0.5em;
+    box-sizing: border-box; /* Asegura que los márgenes y el padding se calculen correctamente */
+    max-width: 100%; /* No excede el ancho del contenedor padre */
+}
+
+#msg {
+    flex-grow: 1;
+    height: 2.5em; /* Ajustar la altura del cuadro de texto */
+    font-size: 1em;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 0.5em;
+    box-sizing: border-box; /* Asegura que el padding no haga que el cuadro de texto se desborde */
+    max-width: calc(100% - 5em); /* Ajusta el ancho máximo restando el tamaño del botón */
+}
+
+#button {
+    height: 2.5em; /* La misma altura que el cuadro de texto */
+    padding: 0 1em;
+    font-size: 1em;
+    background-color: #6eafdb; /* Color azul */
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    
+}
+
+#button:hover {
+    background-color: #5a97c7; /* Azul más oscuro al pasar el cursor */
+}
+
+/* Responsividad: Asegurar que el diseño no cambie en pantallas pequeñas */
+@media (max-width: 600px) {
+    #form {
+        flex-direction: row;
+    }
+
+    #msg {
+        width: auto;
+        height: 2.5em;
+    }
+
+    #button {
+        height: 2.5em;
+        padding: 0 1em;
+        flex-shrink: 0; /* Mantener el tamaño original del botón */
+    }
+}
