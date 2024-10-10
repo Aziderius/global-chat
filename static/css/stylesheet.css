@@ -3,6 +3,7 @@ html {
 }
 
 body {
+    font-family: Arial, sans-serif;
     overflow: hidden;
     padding: 0;
     margin: 0;
@@ -12,6 +13,7 @@ body {
 }
 
 #log {
+    font-family: Arial, sans-serif;
     background: white;
     margin: 0;
     padding: 0.5em;
@@ -25,6 +27,7 @@ body {
 }
 
 #form {
+    font-family: Arial, sans-serif;
     display: flex;
     align-items: center;
     padding: 0 0.5em;

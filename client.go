@@ -42,6 +42,9 @@ type Client struct {
 
 	//Buffer para escribir mensajes
 	send chan []byte
+
+	//username para cada cliente
+	username string
 }
 
 /*
@@ -67,7 +70,9 @@ func (c *Client) readPump() {
 			break
 		}
 		message = bytes.TrimSpace(bytes.Replace(message, newline, space, -1))
-		c.hub.broadcast <- message
+		// Preceder el mensaje con el username
+		formattedMessage := []byte(c.username + " -> " + string(message))
+		c.hub.broadcast <- formattedMessage
 	}
 }
 
@@ -120,12 +125,20 @@ func (c *Client) writePump() {
 
 // serveWs se encarga de los request del websocket
 func serveWs(hub *Hub, w http.ResponseWriter, r *http.Request) {
+	// Obtener el username desde la cookie
+	cookie, err := r.Cookie("username")
+	if err != nil {
+		http.Error(w, "Username not found", http.StatusUnauthorized)
+		return
+	}
+	username := cookie.Value
+
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Println(err)
 		return
 	}
-	client := &Client{hub: hub, conn: conn, send: make(chan []byte, 256)}
+	client := &Client{hub: hub, conn: conn, send: make(chan []byte, 256), username: username}
 	client.hub.register <- client
 
 	//permite la recopilacion de memoria a la que hace referencia el cliente
